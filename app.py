@@ -47,17 +47,18 @@ tipo_grafico = st.radio(
 # Gerar gráfico conforme escolha
 if not df_filtrado.empty:
     if tipo_grafico == "Barras":
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(10, 6))  # Aumenta o tamanho do gráfico
         ax.bar(df_filtrado["Unidade Territorial"],
                df_filtrado["Total de famílias em situação de rua inscritas no Cadastro Único"],
                color="skyblue")
         ax.set_ylabel("Total de famílias")
         ax.set_xlabel("Unidade Territorial")
         ax.set_title(f"Gráfico de Barras - {estado}")
+        ax.tick_params(axis='x', labelrotation=45)  # Rotaciona os nomes dos municípios
         st.pyplot(fig)
 
     elif tipo_grafico == "Pizza":
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(8, 8))  # Tamanho ideal para pizza
         ax.pie(df_filtrado["Total de famílias em situação de rua inscritas no Cadastro Único"],
                labels=df_filtrado["Unidade Territorial"],
                autopct="%1.1f%%",
